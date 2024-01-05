@@ -3,6 +3,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background: rgb(25, 124, 63);
+    background: linear-gradient(0deg, rgba(25, 124, 63, 1) 0%, rgba(90, 187, 138, 1) 100%);
 }
 
 * {
@@ -33,12 +35,26 @@ body {
 }
 
 @keyframes tilt-shaking {
-    0% {transform: rotate(0deg);}
-    25% {transform: rotate(3deg);}
-    50% {transform: rotate(0eg);}
-    75% {transform: rotate(-3deg);}
-    100% {transform: rotate(0deg);}
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(3deg);
+    }
+
+    50% {
+        transform: rotate(0eg);
+    }
+
+    75% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
 
 .pokemon-card {
     border-radius: 20px;
@@ -60,19 +76,19 @@ body {
 }
 
 .fire {
-    background-color: #FB6C6C;  
+    background-color: #FB6C6C;
 }
 
 .water {
-    background-color: #77BEFE;  
+    background-color: #77BEFE;
 }
 
 .electric {
-    background-color: #FFD970;  
+    background-color: #FFD970;
 }
 
 .normal {
-    background-color: #CFCFC3;  
+    background-color: #CFCFC3;
 }
 
 .bug {

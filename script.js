@@ -1,6 +1,6 @@
-let currentPokemon;
 let loadPkmLimit = 20;
 let offset = 1;
+let renderOffset = 0;
 let pokemonNames = [];
 let pokemonIds = [];
 let pokemonArray = [];
@@ -13,72 +13,86 @@ function init() {
 
 
 async function loadPokemonArray() {
+    loadingSpinner();
+
     for (let i = offset; i <= loadPkmLimit; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
-        currentPokemon = await response.json();
+        let currentPokemon = await response.json();
         console.log(currentPokemon);
         pokemonArray.push(currentPokemon);
 
-        saveForSearch();  
-        renderPokemon(i);      
+        saveForSearch(currentPokemon);
     }
+    await renderPokemon();
+    loadingSpinner();
 }
 
 
-function renderPokemon(i) {
-    document.getElementById('pokemonIndex').innerHTML += `
-            <div id="pokemonCard${i}" onmouseover="tiltShake(${i})" onmouseout="tiltShakeOff(${i})" class="card pokemon-card ${currentPokemon['types'][0]['type']['name']}">
+function renderPokemon() {
+    for (let j = renderOffset; j < pokemonArray.length; j++) {
+        let pokemon = pokemonArray[j];
+        let id = j + 1;
+        
+        document.getElementById('pokemonIndex').innerHTML += `
+            <div id="pokemonCard${id}" onmouseover="tiltShake(${id})" onmouseout="tiltShakeOff(${id})" class="card pokemon-card ${pokemon['types'][0]['type']['name']}">
                 <div class="card-body">
                 <div class="card-headline-container">
-                    <h4 id="pokemonName" class="card-title title-color title-font mb-3">${currentPokemon['name'].charAt(0).toUpperCase() + currentPokemon['name'].slice(1)}</h4>
-                    <h5>#${currentPokemon['id']}</h5>
+                    <h4 id="pokemonName" class="card-title title-color title-font mb-3">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
+                    <h5>#${pokemon['id']}</h5>
                     </div>
                     <div class="pokemon-min-info">
-                        <div id="pokemonType${i}" class="pokemon-min-info-type">
+                        <div id="pokemonType${id}" class="pokemon-min-info-type">
                             
                         </div>
-                        <img id="pokemonImg${i}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" class="img-fluid pokemon-img" alt="Pokemon">
+                        <img id="pokemonImg${id}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" class="img-fluid pokemon-img" alt="Pokemon">
                     </div>
                 </div>
                 <img src="./assets/img/pokeball.png" class="img-fluid bg-pokeball" alt="Pokeball">
             </div>
     `;
 
-    insertType(i);
+    insertType(id, pokemon);
+    }
 }
 
 
-function insertType(i) {
-    for (let t = 0; t < currentPokemon['types'].length; t++) {
-        let type = currentPokemon['types'][t];
+function insertType(id, pokemon) {
+    for (let t = 0; t < pokemon['types'].length; t++) {
+        let type = pokemon['types'][t];
 
-        document.getElementById(`pokemonType${i}`).innerHTML += `
+        document.getElementById(`pokemonType${id}`).innerHTML += `
             <div class="pokemon-min-type">${type['type']['name'].charAt(0).toUpperCase() + type['type']['name'].slice(1)}</div>
         `;
     }
 }
 
 
-function saveForSearch() {
+function saveForSearch(currentPokemon) {
     pokemonNames.push(currentPokemon['name']);
     pokemonIds.push(currentPokemon['id']);
 }
 
 
-function tiltShake(j) {
-    document.getElementById(`pokemonImg${j}`).classList.add('tilt-shake');
+function tiltShake(id) {
+    document.getElementById(`pokemonImg${id}`).classList.add('tilt-shake');
 }
 
 
-function tiltShakeOff(j) {
-    document.getElementById(`pokemonImg${j}`).classList.remove('tilt-shake');
+function tiltShakeOff(id) {
+    document.getElementById(`pokemonImg${id}`).classList.remove('tilt-shake');
+}
+
+
+function loadingSpinner() {
+    document.getElementById('loadingSpinner').classList.toggle('hide');
 }
 
 
 function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
+    renderOffset = renderOffset + 20;
 
     loadPokemonArray();
 }

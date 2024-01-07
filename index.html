@@ -60,7 +60,12 @@
     </div>
 
     <div class="load-more-button-container">
-        <button onclick="loadMorePokemon()" type="button" class="btn load-more-button">load more...</button>
+        <button onclick="loadMorePokemon()" type="button" class="btn load-more-button">
+            load more...
+            <div id="loadingSpinner" class="spinner-border spinner-border-sm hide" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </button>
     </div>
 
     <script src="./script.js"></script>

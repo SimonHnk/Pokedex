@@ -4,7 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     background: rgb(25, 124, 63);
-    background: linear-gradient(0deg, rgba(25, 124, 63, 1) 0%, rgba(90, 187, 138, 1) 100%);
+    background: linear-gradient(0deg, rgba(25, 124, 63, 1) 0%, rgba(15,134,139,1) 100%);
 }
 
 * {
@@ -36,6 +36,24 @@ header div {
     filter: invert(1);
     height: 150px;
     width: auto;
+}
+
+.search-music-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.music-container {
+    display: flex;
+    gap: 6px;
+    color: rgb(233, 233, 233);
+    font-weight: 500;
+}
+
+.music-container img {
+    height: 20px;
+    cursor: pointer;
 }
 
 .center-index {
@@ -113,6 +131,12 @@ header div {
     overflow: hidden;
     border: 0;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-headline-container {
+    display: flex;
+    justify-content: space-between;
+    color: white;
 }
 
 .pokemon-card:hover {

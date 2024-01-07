@@ -35,7 +35,7 @@ function renderPokemon() {
         let id = j + 1;
 
         document.getElementById('pokemonIndex').innerHTML += `
-            <div id="pokemonCard${id}" onmouseover="tiltShake(${id})" onmouseout="tiltShakeOff(${id})" class="card pokemon-card ${pokemon['types'][0]['type']['name']}">
+            <div onclick="openPokeCard(${j})" id="pokemonCard${id}" onmouseover="tiltShake(${id})" onmouseout="tiltShakeOff(${id})" class="card pokemon-card ${pokemon['types'][0]['type']['name']}">
                 <div class="card-body">
                 <div class="card-headline-container">
                     <h4 id="pokemonName" class="card-title title-color title-font mb-3">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
@@ -125,6 +125,14 @@ function searchPokemon() {
         }
     }
 }
+
+
+function openPokeCard(j) {
+    let card = document.getElementById('pokemonInfoCard');
+    let pokemon = pokemonArray[j];
+    console.log(pokemon);
+}
+
 
 document.getElementById('playBtn').addEventListener('click', function playMusic() {backgroundSound.play();});
 

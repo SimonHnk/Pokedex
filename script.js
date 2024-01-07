@@ -33,7 +33,7 @@ function renderPokemon() {
     for (let j = renderOffset; j < pokemonArray.length; j++) {
         let pokemon = pokemonArray[j];
         let id = j + 1;
-        
+
         document.getElementById('pokemonIndex').innerHTML += `
             <div id="pokemonCard${id}" onmouseover="tiltShake(${id})" onmouseout="tiltShakeOff(${id})" class="card pokemon-card ${pokemon['types'][0]['type']['name']}">
                 <div class="card-body">
@@ -52,7 +52,7 @@ function renderPokemon() {
             </div>
     `;
 
-    insertType(id, pokemon);
+        insertType(id, pokemon);
     }
 }
 
@@ -126,12 +126,7 @@ function searchPokemon() {
     }
 }
 
-
-function playMusic() {
-    backgroundSound.play();
-}
+document.getElementById('playBtn').addEventListener('click', function playMusic() {backgroundSound.play();});
 
 
-function offMusic() {
-    backgroundSound.pause();
-}
+document.getElementById('pauseBtn').addEventListener('click', function offMusic() {backgroundSound.pause();});

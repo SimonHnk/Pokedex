@@ -290,6 +290,6 @@ header div {
 
 @media(max-width: 350px) {
     .header-logo {
-        height: 100px;
+        height: 120px;
     }
 }

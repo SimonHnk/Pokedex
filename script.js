@@ -131,6 +131,14 @@ function openPokeCard(j) {
     let card = document.getElementById('pokemonInfoCard');
     let pokemon = pokemonArray[j];
     console.log(pokemon);
+
+    card.innerHTML = `
+            <div class="pokemon-info-card-background">
+                <div class="card pokemon-info-card">
+
+                </div>
+            </div>
+    `;
 }
 
 

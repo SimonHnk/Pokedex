@@ -359,19 +359,51 @@ header div {
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
+    margin-top: 16px;
 }
 
 .back-arrow {
     width: 25px;
     height: 20px;
     cursor: pointer;
+    transition: transform 180ms ease-in-out;
+}
+
+.back-arrow:hover {
+    transform: scale(1.15);
 }
 
 .fav-pokeball {
-    width: 25px;
+    width: 28px;
     height: auto;
     filter: opacity(0.85);
     cursor: pointer;
+}
+
+.fav-pokeball:hover {
+    animation: tilt-shaking-fav 1s;
+}
+
+@keyframes tilt-shaking-fav {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(0eg);
+    }
+
+    75% {
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .hide {

@@ -279,7 +279,7 @@ header div {
 }
 
 .pokemon-info-card-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -404,6 +404,17 @@ header div {
     100% {
         transform: rotate(0deg);
     }
+}
+
+.next-arrow {
+    width: 40px;
+    height: auto;
+    transition: transform 150ms ease-in-out;
+}
+
+.next-arrow:hover {
+    transform: scale(1.15);
+    cursor: pointer;
 }
 
 .hide {

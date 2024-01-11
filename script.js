@@ -151,37 +151,39 @@ function openPokeCard(j) {
 
     card.innerHTML = `
     <div class="pokemon-info-card-background">
-    <div class="card pokemon-info-card ${pokemon['types'][0]['type']['name']}">
-        <img class="img-fluid bg-info-card-pokeball" src="./assets/img/pokeball.png" alt="Pokeball">
-        <div class="pokemon-info-card-top">
-            <div style="padding-left: 20px; padding-right: 20px;">
-                <div class="headline-nav">
-                    <img onclick="exitPokeCard()" class="back-arrow" src="./assets/img/back-arrow.png" alt="">
-                    <img id="favPokemon${id}" onclick="saveToFav(${id})" class="fav-pokeball" src="./assets/img/pokeball.png" alt="">
-                </div>
-                <div class="pokemon-img-info-card-headline-container">
-                    <div>
-                        <h4 class="card-title title-color title-font">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
-                        <div class="pokemon-min-info">
-                            <div id="${typeContainer}${id}" class="pokemon-info-card-type">
+        ${lastPokemon(j)}
+        <div class="card pokemon-info-card ${pokemon['types'][0]['type']['name']}">
+            <img class="img-fluid bg-info-card-pokeball" src="./assets/img/pokeball.png" alt="Pokeball">
+            <div class="pokemon-info-card-top">
+                <div style="padding-left: 20px; padding-right: 20px;">
+                    <div class="headline-nav">
+                        <img onclick="exitPokeCard()" class="back-arrow" src="./assets/img/back-arrow.png" alt="">
+                        <img id="favPokemon${id}" onclick="saveToFav(${id})" class="fav-pokeball" src="./assets/img/pokeball.png" alt="">
+                    </div>
+                    <div class="pokemon-img-info-card-headline-container">
+                        <div>
+                            <h4 class="card-title title-color title-font">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
+                            <div class="pokemon-min-info">
+                                <div id="${typeContainer}${id}" class="pokemon-info-card-type">
                                 
+                                </div>
                             </div>
                         </div>
+                        <h5>#${insertId(id)}</h5>
                     </div>
-                    <h5>#${insertId(id)}</h5>
-                </div>
-                <div class="info-img-container">
-                    <img class="pokemon-img-info-card"
+                    <div class="info-img-container">
+                        <img class="pokemon-img-info-card"
                         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"
                         alt="Pokemon">
+                    </div>
+                </div>
+                <div class="card pokemon-info-card-bottom">
+
                 </div>
             </div>
-            <div class="card pokemon-info-card-bottom">
-
-            </div>
         </div>
+        ${nextPokemonArrow(j)}
     </div>
-</div>
     `;
 
     insertType(id, pokemon, typeContainer)
@@ -204,6 +206,34 @@ function saveToFav(id) {
     } else {
         pokeSrc.src = './assets/img/pokeball.png';
     }
+}
+
+
+function nextPokemonArrow(j) {
+    if (j < pokemonArray.length - 1) {
+        return `
+        <div>
+            <img onclick="openPokeCard(${j + 1})" class="next-arrow" src="./assets/img/arrow-right.png" alt="Arrow-Right">
+        </div>
+        `;
+    }
+    return `
+        <div style="width: 40px;"></div>
+        `;
+}
+
+
+function lastPokemon(j) {
+    if (j > 0) {
+        return `
+        <div>
+            <img onclick="openPokeCard(${j - 1})" class="next-arrow" src="./assets/img/arrow-left.png" alt="Arrow-Left">
+        </div>
+        `;
+    }
+    return `
+        <div style="width: 40px;"></div>
+        `;
 }
 
 

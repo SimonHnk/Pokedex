@@ -236,7 +236,7 @@ async function openPokeCard(j) {
                         <table class="breeding-table">
                             <tr>
                                 <td>Gender</td>
-                                <td>
+                                <td class="aling-items">
                                     <img class="male-icon" src="./assets/img/male-icon.png" alt="Male-Symbol">  
                                     ${parseFloat(100 - pokemonSpecies[0]['gender_rate'] / 0.08).toFixed(2)}%                                    
                                 </td>

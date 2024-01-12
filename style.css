@@ -278,6 +278,13 @@ header div {
     color: rgba(255, 255, 255, 1);
 }
 
+.load-more-button:active:focus, .load-more-button:active  {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 1);
+}
+
 .pokemon-info-card-background {
     position: fixed;
     top: 0;
@@ -294,7 +301,7 @@ header div {
 .pokemon-info-card {
     max-width: 400px;
     width: 100%;
-    min-height: 700px;
+    min-height: 500px;
     border-radius: 20px;
     margin: 8px;
     display: flex;
@@ -306,7 +313,7 @@ header div {
 }
 
 .pokemon-info-card-bottom {
-    min-height: 400px;
+    min-height: 250px;
     border-radius: 20px;
     transition: 220ms;
 }
@@ -417,8 +424,101 @@ header div {
     cursor: pointer;
 }
 
+.nav-table {
+    margin-top: 24px;
+    z-index: 2;
+}
+
+.nav-table tr {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.nav-table td span {
+    position: relative;
+}
+
+.nav-table td span:hover {
+    cursor: pointer;
+}
+
+.nav-table td span:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-table td span::after {
+    position: absolute;
+    top: 26px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #46D1B1;
+    transform: scaleX(0);
+    transition: 220ms;
+}
+
+#pokemon-info-container {
+    width: 100%;
+    padding: 16px;
+}
+
+.about-table {
+    width: 100%;
+    font-weight: 500;
+}
+
+.about-table td:first-child {
+    width: 25%;
+    color: #A8ACAF;
+}
+
+.about-table td:nth-child(2) {
+    font-size: 14px;
+}
+
+.breed-headline {
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.breeding-table {
+    width: 100%;
+    font-weight: 500;
+}
+
+.breeding-table td:first-child {
+    width: 25%;
+    color: #A8ACAF;
+}
+
+.breeding-table td:nth-child(2) {
+    font-size: 14px;
+    width: 25%;
+}
+
+.breeding-table td:nth-child(3) {
+    font-size: 14px;
+}
+
+.female-icon {
+    width: 10px;
+    height: auto;
+}
+
+.male-icon {
+    width: 16px;
+    height: auto;
+}
+
 .hide {
     display: none;
+}
+
+.white {
+    color: white;
 }
 
 @media(max-width: 500px) {

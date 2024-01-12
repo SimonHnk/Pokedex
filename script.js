@@ -4,6 +4,8 @@ let renderOffset = 0;
 let pokemonNames = [];
 let pokemonIds = [];
 let pokemonArray = [];
+let pokemonSpecies = [];
+let pokemonEvolution = [];
 let backgroundSound = new Audio('./assets/sounds/rpg-town-loop.mp3');
 let favPokemons = [];
 
@@ -66,6 +68,18 @@ function insertType(id, pokemon, typeContainer) {
         document.getElementById(`${typeContainer}${id}`).innerHTML += `
             <div class="pokemon-min-type">${type['type']['name'].charAt(0).toUpperCase() + type['type']['name'].slice(1)}</div>
         `;
+    }
+}
+
+
+function insertAbility(pokemon) {
+    for (let a = 0; a < pokemon['abilities'].length; a++) {
+        let ability = pokemon['abilities'][a];
+
+        document.getElementById('abilityContainer').innerHTML += `
+        ${ability['ability']['name'].charAt(0).toUpperCase() + ability['ability']['name'].slice(1)}
+        `;
+
     }
 }
 
@@ -142,12 +156,23 @@ function searchPokemon() {
 }
 
 
-function openPokeCard(j) {
+async function openPokeCard(j) {
     let card = document.getElementById('pokemonInfoCard');
     let pokemon = pokemonArray[j];
     let id = j + 1;
     let typeContainer = 'cardPokemonType';
-    console.log(pokemon);
+
+    card.innerHTML = `
+    <div class="pokemon-info-card-background">
+        <div class="text-center">
+            <div class="spinner-border white" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    `;
+
+    await loadSinglePokemonInformation(id);
 
     card.innerHTML = `
     <div class="pokemon-info-card-background">
@@ -178,7 +203,54 @@ function openPokeCard(j) {
                     </div>
                 </div>
                 <div class="card pokemon-info-card-bottom">
+                    <table class="nav-table">
+                        <tr>
+                            <td><span style="color: #46D1B1;">About</span></td>
+                            <td><span>Base Stats</span></td>
+                            <td><span>Evolution</span></td>
+                            <td><span>Moves</span></td>
+                        </tr>
+                    </table>
+                    <div id="pokemon-info-container">
+                        <table class="about-table">
+                            <tr>
+                                <td>Species</td>
+                                <td>${pokemonSpecies[0]['genera'][7]['genus']}</td>
+                            </tr>
+                            <tr>
+                                <td>Height</td>
+                                <td>${parseFloat(pokemon['height'] / 10).toFixed(2).replace('.', ',')} m</td>
+                            </tr>
+                            <tr>
+                                <td>Weight</td>
+                                <td>${parseFloat(pokemon['weight'] / 10).toFixed(2).replace('.', ',')} kg</td>
+                            </tr>
+                            <tr>
+                                <td>Abilities</td>
+                                <td id="abilityContainer">
 
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="breed-headline">Breeding</div>
+                        <table class="breeding-table">
+                            <tr>
+                                <td>Gender</td>
+                                <td>
+                                    <img class="male-icon" src="./assets/img/male-icon.png" alt="Male-Symbol">  
+                                    ${parseFloat(100 - pokemonSpecies[0]['gender_rate'] / 0.08).toFixed(2)}%                                    
+                                </td>
+                                <td>
+                                    <img class="female-icon" src="./assets/img/female-icon.png" alt="Female-Symbol">                                    
+                                    ${parseFloat(pokemonSpecies[0]['gender_rate'] / 0.08).toFixed(2)}%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Egg Group</td>
+                                <td>${pokemonSpecies[0]['egg_groups'][0]['name'].charAt(0).toUpperCase() + pokemonSpecies[0]['egg_groups'][0]['name'].slice(1)}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,6 +259,7 @@ function openPokeCard(j) {
     `;
 
     insertType(id, pokemon, typeContainer)
+    insertAbility(pokemon);
 }
 
 
@@ -194,6 +267,20 @@ function exitPokeCard() {
     let card = document.getElementById('pokemonInfoCard');
 
     card.innerHTML = '';
+}
+
+async function loadSinglePokemonInformation(id) {
+    let speciesLink = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+    let species = await speciesLink.json();
+    pokemonSpecies = [];
+    pokemonSpecies.push(species);
+    console.log(species);
+
+    let evolutionLink = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
+    let evolution = await evolutionLink.json();
+    pokemonEvolution = [];
+    pokemonEvolution.push(evolution);
+    console.log(evolution);
 }
 
 

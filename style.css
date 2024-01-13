@@ -313,7 +313,7 @@ header div {
 }
 
 .pokemon-info-card-bottom {
-    min-height: 250px;
+    height: 350px;
     border-radius: 20px;
     transition: 220ms;
 }
@@ -526,6 +526,49 @@ header div {
     height: auto;
 }
 
+.stat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-type-bar {
+    display: flex;
+    align-items: center;
+}
+
+.stat-name-container {
+    width: 50%;
+    color: #A8ACAF;
+    font-weight: 500;
+}
+
+.stat-count-container {
+    width: 18%;
+    font-weight: 500;
+}
+
+.stat-bar-container {
+    width: 100%;
+}
+
+.progress-height {
+    height: 6px;
+}
+
+.moves-container {
+   display: flex;
+   flex-wrap: wrap; 
+   gap: 6px;
+   overflow-y: auto;
+   max-height: 260px;
+}
+
+.move-single {
+    font-weight: 500;
+    color: #585454;
+}
+
 .hide {
     display: none;
 }
@@ -533,6 +576,29 @@ header div {
 .white {
     color: white;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px grey;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #46D1B1;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3aaa90;
+  }
 
 @media(max-width: 500px) {
     .header-icon {

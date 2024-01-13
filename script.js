@@ -205,10 +205,10 @@ async function openPokeCard(j) {
                 <div class="card pokemon-info-card-bottom">
                     <table class="nav-table">
                         <tr>
-                            <td><span style="color: #46D1B1;">About</span></td>
-                            <td><span>Base Stats</span></td>
-                            <td><span>Evolution</span></td>
-                            <td><span>Moves</span></td>
+                            <td><span id="aboutTab" onclick="aboutTab(${j})" style="color: #46D1B1;">About</span></td>
+                            <td><span id="statsTab" onclick="statsTab(${j})">Base Stats</span></td>
+                            <td><span id="evolutionTab" onclick="evolutionTab()">Evolution</span></td>
+                            <td><span id="movesTab" onclick="movesTab(${j})">Moves</span></td>
                         </tr>
                     </table>
                     <div id="pokemon-info-container">
@@ -258,7 +258,7 @@ async function openPokeCard(j) {
     </div>
     `;
 
-    insertType(id, pokemon, typeContainer)
+    insertType(id, pokemon, typeContainer);
     insertAbility(pokemon);
 }
 
@@ -268,6 +268,197 @@ function exitPokeCard() {
 
     card.innerHTML = '';
 }
+
+
+function colorOffSelectedTab() {
+    document.getElementById('aboutTab').style = 'color: unset;';
+    document.getElementById('statsTab').style = 'color: unset;';
+    document.getElementById('evolutionTab').style = 'color: unset;';
+    document.getElementById('movesTab').style = 'color: unset;';
+}
+
+
+function aboutTab(j) {
+    colorOffSelectedTab();
+    document.getElementById('aboutTab').style = 'color: #46D1B1;';
+
+    let pokemon = pokemonArray[j]
+
+    document.getElementById('pokemon-info-container').innerHTML = `
+        <table class="about-table">
+            <tr>
+                <td>Species</td>
+                <td>${pokemonSpecies[0]['genera'][7]['genus']}</td>
+            </tr>
+            <tr>
+            <td>Height</td>
+                <td>${parseFloat(pokemon['height'] / 10).toFixed(2).replace('.', ',')} m</td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td>${parseFloat(pokemon['weight'] / 10).toFixed(2).replace('.', ',')} kg</td>
+            </tr>
+            <tr>
+                <td>Abilities</td>
+                <td id="abilityContainer">
+
+                </td>
+            </tr>
+        </table>
+        <div class="breed-headline">Breeding</div>
+        <table class="breeding-table">
+            <tr>
+                <td>Gender</td>
+                <td class="aling-items">
+                    <img class="male-icon" src="./assets/img/male-icon.png" alt="Male-Symbol">  
+                    ${parseFloat(100 - pokemonSpecies[0]['gender_rate'] / 0.08).toFixed(2)}%                                    
+                </td>
+                <td>
+                    <img class="female-icon" src="./assets/img/female-icon.png" alt="Female-Symbol">                                    
+                    ${parseFloat(pokemonSpecies[0]['gender_rate'] / 0.08).toFixed(2)}%
+                </td>
+            </tr>
+            <tr>
+                <td>Egg Group</td>
+                <td>${pokemonSpecies[0]['egg_groups'][0]['name'].charAt(0).toUpperCase() + pokemonSpecies[0]['egg_groups'][0]['name'].slice(1)}</td>
+            </tr>
+        </table>
+    `;
+
+    insertAbility(pokemon);
+}
+
+
+function statsTab(j) {
+    colorOffSelectedTab();
+    document.getElementById('statsTab').style = 'color: #46D1B1;';
+
+    let pokemon = pokemonArray[j]['stats']
+    let total = pokemon[0]['base_stat'] + pokemon[1]['base_stat'] + pokemon[2]['base_stat'] + pokemon[3]['base_stat'] + pokemon[4]['base_stat'] + pokemon[5]['base_stat']
+
+    document.getElementById('pokemon-info-container').innerHTML = `
+    <div class="stat-container">
+        <div class="stat-type-bar">
+            <div class="stat-name-container">HP</div>
+            <div class="stat-count-container">${pokemon[0]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="HP" aria-valuenow="${pokemon[0]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-danger" style="width: ${calcStatBar(pokemon[0]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Attack</div>
+            <div class="stat-count-container">${pokemon[1]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Attack" aria-valuenow="${pokemon[1]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-success" style="width: ${calcStatBar(pokemon[1]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Defense</div>
+            <div class="stat-count-container">${pokemon[2]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Defense" aria-valuenow="${pokemon[2]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-danger" style="width: ${calcStatBar(pokemon[2]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Sp. Attack</div>
+            <div class="stat-count-container">${pokemon[3]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Sp. Attack" aria-valuenow="${pokemon[3]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-success" style="width: ${calcStatBar(pokemon[3]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Sp. Defense</div>
+            <div class="stat-count-container">${pokemon[4]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Sp. Defense" aria-valuenow="${pokemon[4]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-success" style="width: ${calcStatBar(pokemon[4]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Speed</div>
+            <div class="stat-count-container">${pokemon[5]['base_stat']}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Speed" aria-valuenow="${pokemon[5]['base_stat']}" aria-valuemin="0"
+                    aria-valuemax="255">
+                    <div class="progress-bar bg-danger" style="width: ${calcStatBar(pokemon[5]['base_stat'])}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="stat-type-bar">
+            <div class="stat-name-container">Total</div>
+            <div class="stat-count-container">${total}</div>
+            <div class="stat-bar-container">
+                <div class="progress progress-height" role="progressbar"
+                    aria-label="Total" aria-valuenow="${total}" aria-valuemin="0"
+                    aria-valuemax="1530">
+                    <div class="progress-bar bg-success" style="width: ${calcStatBarTotal(total)}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+
+function calcStatBar(x) {
+    let stat = x * 100 / 255;
+    return stat.toFixed(2);
+}
+
+function calcStatBarTotal(t) {
+    let toalBar = t * 100 / 1530;
+    return toalBar.toFixed(2);
+}
+
+
+function evolutionTab() {
+    colorOffSelectedTab();
+    document.getElementById('evolutionTab').style = 'color: #46D1B1;';
+
+    document.getElementById('pokemon-info-container').innerHTML = `
+    
+    `;
+}
+
+
+function movesTab(j) {
+    colorOffSelectedTab();
+    document.getElementById('movesTab').style = 'color: #46D1B1;';
+
+    let pokemonMoves = pokemonArray[j]['moves'];
+
+    document.getElementById('pokemon-info-container').innerHTML = '<div id="movesContainer" class="moves-container"></div>';
+
+    for (let m = 0; m < pokemonMoves.length; m++) {
+        let moves = pokemonMoves[m]['move']['name'];
+
+        document.getElementById('movesContainer').innerHTML += `       
+            <div class="move-single">${moves.charAt(0).toUpperCase() + moves.slice(1)},</div>      
+        `;
+        
+    }
+}
+
 
 async function loadSinglePokemonInformation(id) {
     let speciesLink = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)

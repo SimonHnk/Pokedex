@@ -569,6 +569,27 @@ header div {
     color: #585454;
 }
 
+.pokemon-evolution-container {
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.evolution-pokemon-img {
+    width: 96px;
+    cursor: pointer;
+}
+
+.evolution-pokemon-img:hover {
+    animation: tilt-shaking 800ms;
+}
+
+.evolution-arrow {
+    width: 32px;
+}
+
 .hide {
     display: none;
 }

@@ -6,6 +6,8 @@ let pokemonIds = [];
 let pokemonArray = [];
 let pokemonSpecies = [];
 let pokemonEvolution = [];
+let pokemonEvolutionName = [];
+let pokemonEvolutionChainPokemons = [];
 let backgroundSound = new Audio('./assets/sounds/rpg-town-loop.mp3');
 let favPokemons = [];
 
@@ -77,7 +79,7 @@ function insertAbility(pokemon) {
         let ability = pokemon['abilities'][a];
 
         document.getElementById('abilityContainer').innerHTML += `
-        ${ability['ability']['name'].charAt(0).toUpperCase() + ability['ability']['name'].slice(1)}
+        ${ability['ability']['name'].charAt(0).toUpperCase() + ability['ability']['name'].slice(1)}${returnComma(a, pokemon['abilities'].length)}
         `;
 
     }
@@ -173,6 +175,7 @@ async function openPokeCard(j) {
     `;
 
     await loadSinglePokemonInformation(id);
+    saveEvolutionChainPokemons();
 
     card.innerHTML = `
     <div class="pokemon-info-card-background">
@@ -434,10 +437,26 @@ function calcStatBarTotal(t) {
 function evolutionTab() {
     colorOffSelectedTab();
     document.getElementById('evolutionTab').style = 'color: #46D1B1;';
+    document.getElementById('pokemon-info-container').innerHTML = `<div class="pokemon-evolution-container" id="pokemonEvolutionContainer"></div>`;
 
-    document.getElementById('pokemon-info-container').innerHTML = `
-    
-    `;
+    for (let ev_pokms = 0; ev_pokms < pokemonEvolutionChainPokemons.length; ev_pokms++) {
+        let ev_pokm = pokemonEvolutionChainPokemons[ev_pokms];
+        let ev_pokmSprite = ev_pokm['sprites']['other']['official-artwork']['front_default'];
+        let ev_pokmCard = ev_pokm['id'] - 1;
+        
+        document.getElementById('pokemonEvolutionContainer').innerHTML += `
+        <div><img onclick="openPokeCard(${ev_pokmCard})" class="evolution-pokemon-img" src="${ev_pokmSprite}" alt="Pokemon-Img"></div>
+        <div>${evolutionChainArrow(ev_pokms, pokemonEvolutionChainPokemons.length)}</div>
+        `;
+    }
+}
+
+
+function evolutionChainArrow(ev_pokms, length) {
+    while (ev_pokms < length - 1) {
+        return '<img class="evolution-arrow" src="./assets/img/arrow-evolution.png" alt="Arrow">';
+    }
+    return '';
 }
 
 
@@ -453,10 +472,18 @@ function movesTab(j) {
         let moves = pokemonMoves[m]['move']['name'];
 
         document.getElementById('movesContainer').innerHTML += `       
-            <div class="move-single">${moves.charAt(0).toUpperCase() + moves.slice(1)},</div>      
+            <div class="move-single">${moves.charAt(0).toUpperCase() + moves.slice(1)}${returnComma(m, pokemonMoves.length)}</div>      
         `;
         
     }
+}
+
+
+function returnComma(arrayPlace, arrayLength) {
+    while (arrayPlace < arrayLength - 1) {
+        return ',';
+    }
+    return '';
 }
 
 
@@ -464,14 +491,37 @@ async function loadSinglePokemonInformation(id) {
     let speciesLink = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
     let species = await speciesLink.json();
     pokemonSpecies = [];
-    pokemonSpecies.push(species);
+    await pokemonSpecies.push(species);
     console.log(species);
 
-    let evolutionLink = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
+    let evolutionUrl = pokemonSpecies[0]['evolution_chain']['url'];
+    let evolutionLink = await fetch(evolutionUrl);
     let evolution = await evolutionLink.json();
     pokemonEvolution = [];
-    pokemonEvolution.push(evolution);
+    await pokemonEvolution.push(evolution);
     console.log(evolution);
+
+    pokemonEvolutionName = [];
+    pokemonEvolutionName.push(pokemonEvolution[0]['chain']['species']['name'])
+    let evolves_to = pokemonEvolution[0]['chain']['evolves_to'];
+    while(evolves_to.length > 0){
+        pokemonEvolutionName.push(evolves_to[0]['species']['name']);
+
+        evolves_to = evolves_to[0]['evolves_to'];
+    }
+}
+
+
+async function saveEvolutionChainPokemons() {
+    pokemonEvolutionChainPokemons = [];
+
+    for (let ev_pokms = 0; ev_pokms < pokemonEvolutionName.length; ev_pokms++) {
+        let ev_pokm = pokemonEvolutionName[ev_pokms];
+        
+        let ev_pokmLink = await fetch(`https://pokeapi.co/api/v2/pokemon/${ev_pokm}`);
+        let ev_pokmJson = await ev_pokmLink.json();
+        pokemonEvolutionChainPokemons.push(ev_pokmJson);
+    }
 }
 
 

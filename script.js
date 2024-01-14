@@ -437,7 +437,7 @@ function calcStatBarTotal(t) {
 function evolutionTab() {
     colorOffSelectedTab();
     document.getElementById('evolutionTab').style = 'color: #46D1B1;';
-    document.getElementById('pokemon-info-container').innerHTML = `<div class="pokemon-evolution-container" id="pokemonEvolutionContainer"></div>`;
+    document.getElementById('pokemon-info-container').innerHTML = `<div class="pokemon-evolution"><div class="pokemon-evolution-container" id="pokemonEvolutionContainer"></div></div>`;
 
     for (let ev_pokms = 0; ev_pokms < pokemonEvolutionChainPokemons.length; ev_pokms++) {
         let ev_pokm = pokemonEvolutionChainPokemons[ev_pokms];

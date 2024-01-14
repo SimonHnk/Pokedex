@@ -569,12 +569,21 @@ header div {
     color: #585454;
 }
 
-.pokemon-evolution-container {
+.pokemon-evolution {
     height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.pokemon-evolution-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    border: 1px solid gray;
+    border-radius: 20px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
 }
 
 .evolution-pokemon-img {

@@ -56,7 +56,7 @@ function insertOpenPokeCardHTML(j, id, pokemon, typeContainer) {
                 <div style="padding-left: 20px; padding-right: 20px;">
                     <div class="headline-nav">
                         <img onclick="exitPokeCard()" class="back-arrow" src="./assets/img/back-arrow.png" alt="">
-                        <img id="favPokemon${id}" onclick="saveToFav(${id})" class="fav-pokeball" src="./assets/img/pokeball.png" alt="">
+                        <img id="favPokemon${id}" onclick="saveToFav(${id},${j})" class="fav-pokeball" src="${returnFavImgSrc(id)}" alt="">
                     </div>
                     <div class="pokemon-img-info-card-headline-container">
                         <div>

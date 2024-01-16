@@ -1,5 +1,10 @@
+init();
+
+
 function init() {
     loadPokemonArray();
+    loadFavPokemons();
+    favPokemonCount();
 }
 
 
@@ -201,7 +206,7 @@ function evolutionTab() {
         let ev_pokm = pokemonEvolutionChainPokemons[ev_pokms];
         let ev_pokmSprite = ev_pokm['sprites']['other']['official-artwork']['front_default'];
         let ev_pokmCard = ev_pokm['id'] - 1;
-        
+
         document.getElementById('pokemonEvolutionContainer').innerHTML += insertEvolutionTabHTML(ev_pokmCard, ev_pokmSprite, ev_pokms, pokemonEvolutionChainPokemons);
     }
 }
@@ -219,7 +224,7 @@ function movesTab(j) {
         let moves = pokemonMoves[m]['move']['name'];
 
         document.getElementById('movesContainer').innerHTML += insertMovesTabHTML(moves, m, pokemonMoves);
-        
+
     }
 }
 
@@ -253,7 +258,7 @@ function savePokemonEvolutionName() {
     pokemonEvolutionName = [];
     pokemonEvolutionName.push(pokemonEvolution[0]['chain']['species']['name'])
     let evolves_to = pokemonEvolution[0]['chain']['evolves_to'];
-    while(evolves_to.length > 0){
+    while (evolves_to.length > 0) {
         pokemonEvolutionName.push(evolves_to[0]['species']['name']);
 
         evolves_to = evolves_to[0]['evolves_to'];
@@ -265,7 +270,7 @@ async function saveEvolutionChainPokemons() {
 
     for (let ev_pokms = 0; ev_pokms < pokemonEvolutionName.length; ev_pokms++) {
         let ev_pokm = pokemonEvolutionName[ev_pokms];
-        
+
         let ev_pokmLink = await fetch(`https://pokeapi.co/api/v2/pokemon/${ev_pokm}`);
         let ev_pokmJson = await ev_pokmLink.json();
         pokemonEvolutionChainPokemons.push(ev_pokmJson);
@@ -273,14 +278,67 @@ async function saveEvolutionChainPokemons() {
 }
 
 
-function saveToFav(id) {
-    let pokeball = document.getElementById(`favPokemon${id}`).getAttribute('src');
-    let pokeSrc = document.getElementById(`favPokemon${id}`);
+function saveToFav(id, j) {
+    proofAlreadySaved(id, j);
 
-    if (pokeball == './assets/img/pokeball.png') {
-        pokeSrc.src = './assets/img/pokeball-fav.png';
+
+
+    saveFavPokemons();
+    favPokemonCount();
+    openPokeCard(j);
+}
+
+
+function proofAlreadySaved(id, j) {
+    for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
+        let favPokemon = favPokemons[favPkm];
+
+        if (favPokemon['id'].includes(`${id}`)) {
+            favPokemons.splice(favPkm, 1);
+            return true;
+        }
+    }
+    let favPokemonJson = {
+        'pokemon': pokemonArray[j],
+        'id': `${id}`,
+    };
+
+    favPokemons.push(favPokemonJson);
+}
+
+
+function saveFavPokemons() {
+    localStorage.setItem('favPokemons', JSON.stringify(favPokemons));
+}
+
+
+function loadFavPokemons() {
+    if (localStorage.getItem('favPokemons')) {
+        favPokemons = JSON.parse(localStorage.getItem('favPokemons'));
+    }
+}
+
+
+function returnFavImgSrc(id) {
+    for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
+        let favPokemon = favPokemons[favPkm];
+
+        if (favPokemon['id'].includes(`${id}`)) {
+            return './assets/img/pokeball-fav.png';
+        }
+    }
+    return './assets/img/pokeball.png';
+}
+
+
+function favPokemonCount() {
+    if (favPokemons.length === 0) {
+        document.getElementById('caughtPokemon').classList.add('hide');
     } else {
-        pokeSrc.src = './assets/img/pokeball.png';
+        document.getElementById('caughtPokemon').classList.remove('hide');
+        document.getElementById('caughtPokemonCount').innerHTML = `
+        ${favPokemons.length}
+        `;
     }
 }
 

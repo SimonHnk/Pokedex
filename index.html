@@ -14,9 +14,12 @@
 <body onload="init()">
 
     <header>
-        <div>
+        <div class="header-logo-container">
             <a href="./index.html"><img class="header-logo" src="./assets/img/header-logo.png" alt="header-logo"></a>
             <img class="header-icon" src="./assets/img/header-icon.png" alt="header-icon">
+            <div id="caughtPokemon" class="caught-pokemon-container">
+                <span id="caughtPokemonCount" class="caught-pokemon-count">999</span>
+            </div>
         </div>
         <div class="search-music-container">
             <form class="d-flex" role="search" onsubmit="searchPokemon(); return false;">
@@ -206,7 +209,8 @@
             </div>
         </button>
     </div>
-
+    <script src="./data.js"></script>
+    <script src="./template.js"></script>
     <script src="./script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

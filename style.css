@@ -31,6 +31,10 @@ header div {
     width: auto;
 }
 
+.header-icon:hover {
+    cursor: pointer;
+}
+
 .header-logo {
     margin-top: -20px;
     filter: invert(1);
@@ -581,9 +585,8 @@ header div {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: 1px solid gray;
     border-radius: 20px;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
 }
 
 .evolution-pokemon-img {
@@ -597,6 +600,32 @@ header div {
 
 .evolution-arrow {
     width: 32px;
+}
+
+.header-logo-container {
+    position: relative;
+}
+
+.caught-pokemon-container {
+    background-color: rgba(255, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.caught-pokemon-count {
+    color: white;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 0 0 3px white;
 }
 
 .hide {

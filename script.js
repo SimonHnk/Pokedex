@@ -280,9 +280,6 @@ async function saveEvolutionChainPokemons() {
 
 function saveToFav(id, j) {
     proofAlreadySaved(id, j);
-
-
-
     saveFavPokemons();
     favPokemonCount();
     openPokeCard(j);
@@ -293,7 +290,7 @@ function proofAlreadySaved(id, j) {
     for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
         let favPokemon = favPokemons[favPkm];
 
-        if (favPokemon['id'].includes(`${id}`)) {
+        if (favPokemon['id'] === `${id}`) {
             favPokemons.splice(favPkm, 1);
             return true;
         }
@@ -302,7 +299,6 @@ function proofAlreadySaved(id, j) {
         'pokemon': pokemonArray[j],
         'id': `${id}`,
     };
-
     favPokemons.push(favPokemonJson);
 }
 
@@ -323,7 +319,7 @@ function returnFavImgSrc(id) {
     for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
         let favPokemon = favPokemons[favPkm];
 
-        if (favPokemon['id'].includes(`${id}`)) {
+        if (favPokemon['id'] === `${id}`) {
             return './assets/img/pokeball-fav.png';
         }
     }

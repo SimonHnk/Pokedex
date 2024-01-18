@@ -157,7 +157,7 @@ function insertOpenPokeCardHTML(j, id, pokemon, typeContainer) {
 function insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer) {
     return `
     <div class="pokemon-info-card-background" onclick="exitPokeCard()">
-        ${lastPokemon(fav)}
+        ${lastFavPokemon(fav)}
         <div class="card pokemon-info-card ${pokemon['types'][0]['type']['name']}" onclick="stopPropagation(event)">
             <img class="img-fluid bg-info-card-pokeball" src="./assets/img/pokeball.png" alt="Pokeball">
             <div class="pokemon-info-card-top">
@@ -235,7 +235,7 @@ function insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer) {
                 </div>
             </div>
         </div>
-        ${nextPokemonArrow(fav)}
+        ${nextFavPokemonArrow(fav)}
     </div>
     `;
 }
@@ -414,6 +414,34 @@ function lastPokemon(j) {
         return `
         <div>
             <img onclick="openPokeCard(${j - 1})" class="next-arrow" src="./assets/img/arrow-left.png" alt="Arrow-Left">
+        </div>
+        `;
+    }
+    return `
+        <div style="width: 40px;"></div>
+        `;
+}
+
+
+function nextFavPokemonArrow(fav) {
+    if (fav < favPokemons.length - 1) {
+        return `
+        <div>
+            <img onclick="openFavPokeCard(${fav + 1})" class="next-arrow" src="./assets/img/arrow-right.png" alt="Arrow-Right">
+        </div>
+        `;
+    }
+    return `
+        <div style="width: 40px;"></div>
+        `;
+}
+
+
+function lastFavPokemon(fav) {
+    if (fav > 0) {
+        return `
+        <div>
+            <img onclick="openFavPokeCard(${fav - 1})" class="next-arrow" src="./assets/img/arrow-left.png" alt="Arrow-Left">
         </div>
         `;
     }

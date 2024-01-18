@@ -366,10 +366,28 @@ async function openFavPokeCard(fav) {
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
 
-    card.innerHTML = insertOpenPokeCardHTML(fav, id, pokemon, typeContainer);
+    card.innerHTML = insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer);
 
     insertType(id, pokemon, typeContainer);
     insertAbility(pokemon);
+}
+
+
+function saveToFavRendered(id, fav) {
+    proofAlreadySaved(id, fav);
+    saveFavPokemons();
+    favPokemonCount();
+    openFavPokemons();
+
+    if (favPokemons.length === 0) {
+        return false;
+    }
+    if (fav === favPokemons.length) {
+        openFavPokeCard(fav - 1);
+        return true;  
+    }
+    openFavPokeCard(fav);
+
 }
 
 

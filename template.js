@@ -19,6 +19,27 @@ function insertPokemonCardHTML(j, id, pokemon, typeContainer) {
 }
 
 
+function insertFavPokemonCardHTML(fav, id, pokemon, typeContainer) {
+    return `
+    <div onclick="openFavPokeCard(${fav})" id="pokemonCard${id}" onmouseover="tiltShake(${id})" onmouseout="tiltShakeOff(${id})" class="card pokemon-card ${pokemon['types'][0]['type']['name']}">
+        <div class="card-body">
+        <div class="card-headline-container">
+            <h4 id="pokemonName" class="card-title title-color title-font mb-3">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
+            <h5>#${insertId(id)}</h5>
+            </div>
+            <div class="pokemon-min-info">
+                <div id="${typeContainer}${id}" class="pokemon-min-info-type">
+                    
+                </div>
+                <img id="pokemonImg${id}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" class="img-fluid pokemon-img" alt="Pokemon">
+            </div>
+        </div>
+        <img src="./assets/img/pokeball.png" class="img-fluid bg-pokeball" alt="Pokeball">
+    </div>
+`;
+}
+
+
 function insertTypeHTML(type) {
     return `
     <div class="pokemon-min-type">${type['type']['name'].charAt(0).toUpperCase() + type['type']['name'].slice(1)}</div>

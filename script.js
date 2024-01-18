@@ -341,7 +341,35 @@ function favPokemonCount() {
 
 
 function openFavPokemons() {
+    document.getElementById('pokemonIndex').innerHTML = '';
 
+    for (let fav = 0; fav < favPokemons.length; fav++) {
+        let pokemon = favPokemons[fav]['pokemon'];
+        let id = favPokemons[fav]['id'];
+        let typeContainer = 'pokemonType';
+
+        document.getElementById('pokemonIndex').innerHTML += insertFavPokemonCardHTML(fav, id, pokemon, typeContainer);
+
+        insertType(id, pokemon, typeContainer);
+    }
+}
+
+
+async function openFavPokeCard(fav) {
+    let card = document.getElementById('pokemonInfoCard');
+    let pokemon = favPokemons[fav]['pokemon'];
+    let id = favPokemons[fav]['id'];
+    let typeContainer = 'cardPokemonType';
+
+    card.innerHTML = insertLoadingSpinnerHTML();
+
+    await loadSinglePokemonInformation(id);
+    saveEvolutionChainPokemons();
+
+    card.innerHTML = insertOpenPokeCardHTML(fav, id, pokemon, typeContainer);
+
+    insertType(id, pokemon, typeContainer);
+    insertAbility(pokemon);
 }
 
 

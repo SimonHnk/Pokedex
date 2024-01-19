@@ -8,7 +8,7 @@ function init() {
 }
 
 
-async function loadPokemonArray() { 
+async function loadPokemonArray() {
     loadMoreButtonOff();
     favPokemonButtonOff();
     loadingSpinner();
@@ -103,13 +103,12 @@ function loadMoreButtonOn() {
 }
 
 
-async function loadMorePokemon() {
+function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
     renderOffset = renderOffset + 20;
 
-    await loadPokemonArray();
-
+    loadPokemonArray();
 }
 
 
@@ -251,7 +250,6 @@ function movesTab(j) {
         let moves = pokemonMoves[m]['move']['name'];
 
         document.getElementById('movesContainer').innerHTML += insertMovesTabHTML(moves, m, pokemonMoves);
-
     }
 }
 
@@ -302,120 +300,6 @@ async function saveEvolutionChainPokemons() {
         let ev_pokmJson = await ev_pokmLink.json();
         pokemonEvolutionChainPokemons.push(ev_pokmJson);
     }
-}
-
-
-function saveToFav(id, j) {
-    proofAlreadySaved(id, j);
-    saveFavPokemons();
-    favPokemonCount();
-    openPokeCard(j);
-}
-
-
-function proofAlreadySaved(id, j) {
-    for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
-        let favPokemon = favPokemons[favPkm];
-
-        if (favPokemon['id'] === id) {
-            favPokemons.splice(favPkm, 1);
-            return true;
-        }
-    }
-    let favPokemonJson = {
-        'pokemon': pokemonArray[j],
-        'id': id,
-    };
-    favPokemons.push(favPokemonJson);
-    favPokemons.sort((a, b) => a['id'] - b['id']);
-}
-
-
-function saveFavPokemons() {
-    localStorage.setItem('favPokemons', JSON.stringify(favPokemons));
-}
-
-
-function loadFavPokemons() {
-    if (localStorage.getItem('favPokemons')) {
-        favPokemons = JSON.parse(localStorage.getItem('favPokemons'));
-    }
-}
-
-
-function returnFavImgSrc(id) {
-    for (let favPkm = 0; favPkm < favPokemons.length; favPkm++) {
-        let favPokemon = favPokemons[favPkm];
-
-        if (favPokemon['id'] === id) {
-            return './assets/img/pokeball-fav.png';
-        }
-    }
-    return './assets/img/pokeball.png';
-}
-
-
-function favPokemonCount() {
-    if (favPokemons.length === 0) {
-        document.getElementById('caughtPokemon').classList.add('hide');
-    } else {
-        document.getElementById('caughtPokemon').classList.remove('hide');
-        document.getElementById('caughtPokemonCount').innerHTML = `
-        ${favPokemons.length}
-        `;
-    }
-}
-
-
-function openFavPokemons() {
-    document.getElementById('loadMoreButton').classList.add('hide');
-    document.getElementById('pokemonIndex').innerHTML = '';
-
-    for (let fav = 0; fav < favPokemons.length; fav++) {
-        let pokemon = favPokemons[fav]['pokemon'];
-        let id = favPokemons[fav]['id'];
-        let typeContainer = 'pokemonType';
-
-        document.getElementById('pokemonIndex').innerHTML += insertFavPokemonCardHTML(fav, id, pokemon, typeContainer);
-
-        insertType(id, pokemon, typeContainer);
-    }
-}
-
-
-async function openFavPokeCard(fav) {
-    let card = document.getElementById('pokemonInfoCard');
-    let pokemon = favPokemons[fav]['pokemon'];
-    let id = favPokemons[fav]['id'];
-    let typeContainer = 'cardPokemonType';
-
-    card.innerHTML = insertLoadingSpinnerHTML();
-
-    await loadSinglePokemonInformation(id);
-    saveEvolutionChainPokemons();
-
-    card.innerHTML = insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer);
-
-    insertType(id, pokemon, typeContainer);
-    insertAbility(pokemon);
-}
-
-
-function saveToFavRendered(id, fav) {
-    proofAlreadySaved(id, fav);
-    saveFavPokemons();
-    favPokemonCount();
-    openFavPokemons();
-
-    if (favPokemons.length === 0) {
-        return false;
-    }
-    if (fav === favPokemons.length) {
-        openFavPokeCard(fav - 1);
-        return true;  
-    }
-    openFavPokeCard(fav);
-
 }
 
 

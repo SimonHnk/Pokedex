@@ -9,6 +9,7 @@ function init() {
 
 
 async function loadPokemonArray() {
+    favPokemonButtonOff();
     loadingSpinner();
 
     for (let i = offset; i <= loadPkmLimit; i++) {
@@ -21,6 +22,7 @@ async function loadPokemonArray() {
     }
     await renderPokemon();
     loadingSpinner();
+    favPokemonButtonOn();
 }
 
 
@@ -74,6 +76,18 @@ function tiltShakeOff(id) {
 
 function loadingSpinner() {
     document.getElementById('loadingSpinner').classList.toggle('hide');
+}
+
+
+function favPokemonButtonOff() {
+    document.getElementById('favPokemonButton').onclick = null;
+    document.getElementById('favPokemonButton').classList.add('greyscale');
+}
+
+
+function favPokemonButtonOn() {
+    document.getElementById('favPokemonButton').onclick = () => { openFavPokemons(); };
+    document.getElementById('favPokemonButton').classList.remove('greyscale');
 }
 
 
@@ -341,6 +355,7 @@ function favPokemonCount() {
 
 
 function openFavPokemons() {
+    document.getElementById('loadMoreButton').classList.add('hide');
     document.getElementById('pokemonIndex').innerHTML = '';
 
     for (let fav = 0; fav < favPokemons.length; fav++) {

@@ -29,6 +29,7 @@ header div {
 .header-icon {
     height: 100px;
     width: auto;
+    transition: 300ms;
 }
 
 .header-icon:hover {
@@ -634,6 +635,10 @@ header div {
 
 .white {
     color: white;
+}
+
+.greyscale {
+    filter: grayscale(1);
 }
 
 /* width */

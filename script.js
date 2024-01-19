@@ -8,7 +8,7 @@ function init() {
 }
 
 
-async function loadPokemonArray() {
+async function loadPokemonArray() { 
     favPokemonButtonOff();
     loadingSpinner();
 
@@ -91,12 +91,16 @@ function favPokemonButtonOn() {
 }
 
 
-function loadMorePokemon() {
+async function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
     renderOffset = renderOffset + 20;
 
-    loadPokemonArray();
+    document.getElementById('loadMoreButtonClick').onclick = null;
+
+    await loadPokemonArray();
+
+    document.getElementById('loadMoreButtonClick').onclick = () => { loadMorePokemon(); };
 }
 
 

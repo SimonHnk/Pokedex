@@ -16,9 +16,12 @@
     <header>
         <div class="header-logo-container">
             <a href="./index.html"><img class="header-logo" src="./assets/img/header-logo.png" alt="header-logo"></a>
-            <img id="favPokemonButton" onclick="openFavPokemons()" class="header-icon" src="./assets/img/header-icon.png" alt="header-icon">
-            <div id="caughtPokemon" class="caught-pokemon-container">
-                <span id="caughtPokemonCount" class="caught-pokemon-count"></span>
+            <div style="position: relative;">
+                <img id="favPokemonButton" onclick="openFavPokemons()" class="header-icon"
+                    src="./assets/img/header-icon.png" alt="header-icon">
+                <div id="caughtPokemon" class="caught-pokemon-container">
+                    <span id="caughtPokemonCount" class="caught-pokemon-count"></span>
+                </div>
             </div>
         </div>
         <div class="search-music-container">
@@ -38,165 +41,11 @@
     <section>
         <div id="pokemonInfoCard">
 
-            <!-- <div class="pokemon-info-card-background">
-                <div>
-                    <img onclick="lastPokemon()" class="next-arrow" src="./assets/img/arrow-left.png" alt="Arrow-Left">
-                </div>
-                <div class="card pokemon-info-card grass">
-                    <img class="img-fluid bg-info-card-pokeball" src="./assets/img/pokeball.png" alt="Pokeball">
-                    <div class="pokemon-info-card-top">
-                        <div style="padding-left: 20px; padding-right: 20px;">
-                            <div class="headline-nav">
-                                <img class="back-arrow" src="./assets/img/back-arrow.png" alt="">
-                                <img class="fav-pokeball" src="./assets/img/pokeball.png" alt="">
-                            </div>
-                            <div class="pokemon-img-info-card-headline-container">
-                                <div>
-                                    <h4 class="card-title title-color title-font">Card title</h4>
-                                    <div class="pokemon-min-info">
-                                        <div class="pokemon-info-card-type">
-                                            <div class="pokemon-min-type">
-                                                Grass
-                                            </div>
-                                            <div class="pokemon-min-type">
-                                                Poison
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h5>#001</h5>
-                            </div>
-                            <div class="info-img-container">
-                                <img class="pokemon-img-info-card"
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-                                    alt="Pokemon">
-                            </div>
-                        </div>
-                        <div class="card pokemon-info-card-bottom">
-                            <table class="nav-table">
-                                <tr>
-                                    <td><span style="color: #46D1B1;">About</span></td>
-                                    <td><span>Base Stats</span></td>
-                                    <td><span>Evolution</span></td>
-                                    <td><span>Moves</span></td>
-                                </tr>
-                            </table>
-                            <div id="pokemon-info-container">
-                                <div class="stat-container">
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">HP</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="HP" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-danger" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Attack</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Attack" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-success" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Defense</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Defense" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-danger" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Sp. Attack</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Sp. Attack" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-success" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Sp. Defense</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Sp. Defense" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-success" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Speed</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Speed" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-danger" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="stat-type-bar">
-                                        <div class="stat-name-container">Total</div>
-                                        <div class="stat-count-container">45</div>
-                                        <div class="stat-bar-container">
-                                            <div class="progress progress-height" role="progressbar"
-                                                aria-label="Total" aria-valuenow="45" aria-valuemin="0"
-                                                aria-valuemax="255">
-                                                <div class="progress-bar bg-success" style="width: 17.6%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <img onclick="nextPokemon()" class="next-arrow" src="./assets/img/arrow-right.png"
-                        alt="Arrow-Right">
-                </div>
-            </div> -->
-
         </div>
     </section>
 
     <section class="center-index">
         <div id="pokemonIndex" class="pokemon-index-container">
-
-            <!-- <div class="card pokemon-card" style="background-color: aqua;">
-                <div class="card-body">
-                    <div class="card-headline-container">
-                        <h4 id="pokemonName" class="card-title title-color title-font mb-3">Card title</h4>
-                        <h5>#1</h5>
-                    </div>
-                    <div class="pokemon-min-info">
-                        <div class="pokemon-min-info-type">
-                            <div class="pokemon-min-type">
-                                Grass
-                            </div>
-                            <div class="pokemon-min-type">
-                                Poison
-                            </div>
-                        </div>
-                        <img id="pokemonImg" src="" class="img-fluid pokemon-img" alt="Pokemon">
-                    </div>
-                </div>
-                <img src="./assets/img/pokeball.png" class="img-fluid bg-pokeball" alt="Pokeball">
-            </div> -->
 
         </div>
     </section>
@@ -208,9 +57,6 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </button>
-        <!-- <div class="loading-spinner-overlay">
-
-        </div> -->
     </div>
     <script src="./data.js"></script>
     <script src="./template.js"></script>

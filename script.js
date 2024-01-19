@@ -9,6 +9,7 @@ function init() {
 
 
 async function loadPokemonArray() { 
+    loadMoreButtonOff();
     favPokemonButtonOff();
     loadingSpinner();
 
@@ -23,6 +24,7 @@ async function loadPokemonArray() {
     await renderPokemon();
     loadingSpinner();
     favPokemonButtonOn();
+    loadMoreButtonOn();
 }
 
 
@@ -91,16 +93,23 @@ function favPokemonButtonOn() {
 }
 
 
+function loadMoreButtonOff() {
+    document.getElementById('loadMoreButtonClick').onclick = null;
+}
+
+
+function loadMoreButtonOn() {
+    document.getElementById('loadMoreButtonClick').onclick = () => { loadMorePokemon(); };
+}
+
+
 async function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
     renderOffset = renderOffset + 20;
 
-    document.getElementById('loadMoreButtonClick').onclick = null;
-
     await loadPokemonArray();
 
-    document.getElementById('loadMoreButtonClick').onclick = () => { loadMorePokemon(); };
 }
 
 

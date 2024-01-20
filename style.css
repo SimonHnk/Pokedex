@@ -652,6 +652,14 @@ header div {
     color: white;
 }
 
+.margin-left {
+    margin-left: 8px;
+}
+
+.margin-right {
+    margin-right: 8px;
+}
+
 .greyscale {
     filter: grayscale(1);
 }
@@ -713,12 +721,20 @@ header div {
         font-size: 12px !important;
     }
 
+    .about-table td:first-child {
+        width: 30%;
+    }
+
     .breed-headline {
         font-size: 16px;
     }
 
     .breeding-table tr td {
         font-size: 12px !important;
+    }
+
+    .breeding-table td:first-child {
+        width: 30%;
     }
 
     .stat-container {
@@ -739,6 +755,10 @@ header div {
 
     .pokemon-img-info-card {
         margin-bottom: -35px;
+    }
+
+    .nav-table td span::after {
+        top: 19px;
     }
 }
 

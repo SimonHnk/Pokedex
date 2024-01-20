@@ -414,12 +414,12 @@ function nextFavPokemonArrow(fav) {
     if (fav < favPokemons.length - 1) {
         return `
         <div>
-            <img onclick="openFavPokeCard(${fav + 1})" class="next-arrow" src="./assets/img/arrow-right.png" alt="Arrow-Right">
+            <img onclick="openFavPokeCard(${fav + 1})" class="next-arrow margin-right" src="./assets/img/arrow-right.png" alt="Arrow-Right">
         </div>
         `;
     }
     return `
-        <div style="width: 40px;"></div>
+        <div style="width: 48px;"></div>
         `;
 }
 
@@ -428,12 +428,12 @@ function lastFavPokemon(fav) {
     if (fav > 0) {
         return `
         <div>
-            <img onclick="openFavPokeCard(${fav - 1})" class="next-arrow" src="./assets/img/arrow-left.png" alt="Arrow-Left">
+            <img onclick="openFavPokeCard(${fav - 1})" class="next-arrow margin-left" src="./assets/img/arrow-left.png" alt="Arrow-Left">
         </div>
         `;
     }
     return `
-        <div style="width: 40px;"></div>
+        <div style="width: 48px;"></div>
         `;
 }
 

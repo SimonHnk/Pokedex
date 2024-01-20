@@ -775,4 +775,12 @@ header div {
     .pokemon-img-info-card-headline-container h5 {
         font-size: 16px;
     }
+
+    .pokemon-info-card-bottom {
+        height: 300px;
+    }
+
+    .moves-container {
+        max-height: 220px;
+    }
 }

@@ -103,6 +103,16 @@ function loadMoreButtonOn() {
 }
 
 
+function loadingSpinnerPokeCardOff() {
+    document.getElementById('loadingSpinnerPokeCard').classList.add('hide');
+}
+
+
+function loadingSpinnerPokeCardOn() {
+    document.getElementById('loadingSpinnerPokeCard').classList.remove('hide');
+}
+
+
 function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
@@ -157,11 +167,12 @@ async function openPokeCard(j) {
     let id = j + 1;
     let typeContainer = 'cardPokemonType';
 
-    card.innerHTML = insertLoadingSpinnerHTML();
+    loadingSpinnerPokeCardOn();
 
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
 
+    loadingSpinnerPokeCardOff();
     card.innerHTML = insertOpenPokeCardHTML(j, id, pokemon, typeContainer);
 
     insertType(id, pokemon, typeContainer);

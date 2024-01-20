@@ -54,19 +54,6 @@ function insertAbilityHTML(ability, a, pokemon) {
 }
 
 
-function insertLoadingSpinnerHTML() {
-    return `
-    <div class="pokemon-info-card-background">
-        <div class="text-center">
-            <div class="spinner-border white" style="width: 3rem; height: 3rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    </div>
-    `;
-}
-
-
 function insertOpenPokeCardHTML(j, id, pokemon, typeContainer) {
     return `
     <div class="pokemon-info-card-background" onclick="exitPokeCard()">

@@ -82,11 +82,12 @@ async function openFavPokeCard(fav) {
     let id = favPokemons[fav]['id'];
     let typeContainer = 'cardPokemonType';
 
-    card.innerHTML = insertLoadingSpinnerHTML();
+    loadingSpinnerPokeCardOn();
 
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
 
+    loadingSpinnerPokeCardOff();
     card.innerHTML = insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer);
 
     insertType(id, pokemon, typeContainer);

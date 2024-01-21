@@ -122,16 +122,22 @@ function loadMorePokemon() {
 }
 
 
-function searchPokemon() {
+document.getElementById('searchInput').addEventListener('keyup', function () {
     let searchQuerry = document.getElementById('searchInput').value
     let match = searchQuerry.match(/\d+/);
+
+    if (!searchQuerry) {
+        document.getElementById('loadMoreButton').style.display = 'flex';
+    } else {
+        document.getElementById('loadMoreButton').style.display = 'none';
+    }
 
     if (match) {
         searchIdNumber(match);
     } else {
         searchName(searchQuerry);
     }
-}
+});
 
 
 function searchIdNumber(match) {

@@ -465,3 +465,13 @@ function evolutionChainArrow(ev_pokms, length) {
     }
     return '';
 }
+
+
+function favPokemonsEmptyHTML() {
+    return `
+    <div class="fav-pokemons-empty">
+    There are no favored Pokemons! :(<br>
+    Share some Love <3
+    </div>
+    `;
+}

@@ -62,7 +62,7 @@ function favPokemonCount() {
 
 function openFavPokemons() {
     document.getElementById('loadMoreButton').classList.add('hide');
-    document.getElementById('pokemonIndex').innerHTML = '';
+    favPokemonsEmpty();
 
     for (let fav = 0; fav < favPokemons.length; fav++) {
         let pokemon = favPokemons[fav]['pokemon'];
@@ -72,6 +72,15 @@ function openFavPokemons() {
         document.getElementById('pokemonIndex').innerHTML += insertFavPokemonCardHTML(fav, id, pokemon, typeContainer);
 
         insertType(id, pokemon, typeContainer);
+    }
+}
+
+
+function favPokemonsEmpty() {
+    if (favPokemons.length) {
+        document.getElementById('pokemonIndex').innerHTML = '';
+    } else {
+        document.getElementById('pokemonIndex').innerHTML = favPokemonsEmptyHTML();
     }
 }
 

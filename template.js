@@ -7,8 +7,7 @@ function insertPokemonCardHTML(j, id, pokemon, typeContainer) {
             <h5>#${insertId(id)}</h5>
             </div>
             <div class="pokemon-min-info">
-                <div id="${typeContainer}${id}" class="pokemon-min-info-type">
-                    
+                <div id="${typeContainer}${id}" class="pokemon-min-info-type">                   
                 </div>
                 <img id="pokemonImg${id}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" class="img-fluid pokemon-img" alt="Pokemon">
             </div>
@@ -28,8 +27,7 @@ function insertFavPokemonCardHTML(fav, id, pokemon, typeContainer) {
             <h5>#${insertId(id)}</h5>
             </div>
             <div class="pokemon-min-info">
-                <div id="${typeContainer}${id}" class="pokemon-min-info-type">
-                    
+                <div id="${typeContainer}${id}" class="pokemon-min-info-type">                    
                 </div>
                 <img id="pokemonImg${id}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" class="img-fluid pokemon-img" alt="Pokemon">
             </div>
@@ -109,7 +107,6 @@ function insertOpenPokeCardHTML(j, id, pokemon, typeContainer) {
                             <tr>
                                 <td>Abilities</td>
                                 <td id="abilityContainer">
-
                                 </td>
                             </tr>
                         </table>
@@ -157,8 +154,7 @@ function insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer) {
                         <div>
                             <h4 class="card-title title-color title-font">${pokemon['name'].charAt(0).toUpperCase() + pokemon['name'].slice(1)}</h4>
                             <div class="pokemon-min-info">
-                                <div id="${typeContainer}${id}" class="pokemon-info-card-type">
-                                
+                                <div id="${typeContainer}${id}" class="pokemon-info-card-type">                               
                                 </div>
                             </div>
                         </div>
@@ -196,7 +192,6 @@ function insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer) {
                             <tr>
                                 <td>Abilities</td>
                                 <td id="abilityContainer">
-
                                 </td>
                             </tr>
                         </table>
@@ -246,7 +241,6 @@ function insertAboutTabHTML(pokemon) {
         <tr>
             <td>Abilities</td>
             <td id="abilityContainer">
-
             </td>
         </tr>
     </table>

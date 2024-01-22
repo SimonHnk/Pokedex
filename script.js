@@ -12,13 +12,11 @@ async function loadPokemonArray() {
     loadMoreButtonOff();
     favPokemonButtonOff();
     loadingSpinner();
-
     for (let i = offset; i <= loadPkmLimit; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
         let currentPokemon = await response.json();
         pokemonArray.push(currentPokemon);
-
         saveForSearch(currentPokemon);
     }
     await renderPokemon();
@@ -33,9 +31,7 @@ function renderPokemon() {
         let pokemon = pokemonArray[j];
         let id = j + 1;
         let typeContainer = 'pokemonType';
-
         document.getElementById('pokemonIndex').innerHTML += insertPokemonCardHTML(j, id, pokemon, typeContainer);
-
         insertType(id, pokemon, typeContainer);
     }
 }
@@ -44,7 +40,6 @@ function renderPokemon() {
 function insertType(id, pokemon, typeContainer) {
     for (let t = 0; t < pokemon['types'].length; t++) {
         let type = pokemon['types'][t];
-
         document.getElementById(`${typeContainer}${id}`).innerHTML += insertTypeHTML(type);
     }
 }
@@ -53,9 +48,7 @@ function insertType(id, pokemon, typeContainer) {
 function insertAbility(pokemon) {
     for (let a = 0; a < pokemon['abilities'].length; a++) {
         let ability = pokemon['abilities'][a];
-
         document.getElementById('abilityContainer').innerHTML += insertAbilityHTML(ability, a, pokemon);
-
     }
 }
 
@@ -117,34 +110,33 @@ function loadMorePokemon() {
     offset = offset + 20;
     loadPkmLimit = loadPkmLimit + 20;
     renderOffset = renderOffset + 20;
-
     loadPokemonArray();
 }
 
 
-document.getElementById('searchInput').addEventListener('keyup', function () {
+function searchPokemon() {
     let searchQuerry = document.getElementById('searchInput').value
     let match = searchQuerry.match(/\d+/);
-
     if (!searchQuerry) {
         document.getElementById('loadMoreButton').style.display = 'flex';
     } else {
         document.getElementById('loadMoreButton').style.display = 'none';
     }
-
     if (match) {
         searchIdNumber(match);
     } else {
         searchName(searchQuerry);
     }
-});
+}
+
+
+document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
 
 
 function searchIdNumber(match) {
     for (let sId = 0; sId < pokemonIds.length; sId++) {
         let id = +match[0];
         let index = pokemonIds.indexOf(id);
-
         if (index + 1 == sId + 1) {
             document.getElementById(`pokemonCard${sId + 1}`).style.display = 'block';
         } else {
@@ -157,7 +149,6 @@ function searchIdNumber(match) {
 function searchName(searchQuerry) {
     for (let sName = 0; sName < pokemonNames.length; sName++) {
         let pokeName = pokemonNames[sName];
-
         if (pokeName.includes(searchQuerry.trim().toLowerCase())) {
             document.getElementById(`pokemonCard${sName + 1}`).style.display = 'block';
         } else {
@@ -172,15 +163,11 @@ async function openPokeCard(j) {
     let pokemon = pokemonArray[j];
     let id = j + 1;
     let typeContainer = 'cardPokemonType';
-
     loadingSpinnerPokeCardOn();
-
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
-
     loadingSpinnerPokeCardOff();
     card.innerHTML = insertOpenPokeCardHTML(j, id, pokemon, typeContainer);
-
     insertType(id, pokemon, typeContainer);
     insertAbility(pokemon);
 }
@@ -193,7 +180,6 @@ function stopPropagation(event) {
 
 function exitPokeCard() {
     let card = document.getElementById('pokemonInfoCard');
-
     card.innerHTML = '';
 }
 
@@ -209,11 +195,8 @@ function colorOffSelectedTab() {
 function aboutTab(j) {
     colorOffSelectedTab();
     document.getElementById('aboutTab').style = 'color: #46D1B1;';
-
     let pokemon = pokemonArray[j]
-
     document.getElementById('pokemon-info-container').innerHTML = insertAboutTabHTML(pokemon);
-
     insertAbility(pokemon);
 }
 
@@ -221,10 +204,8 @@ function aboutTab(j) {
 function statsTab(j) {
     colorOffSelectedTab();
     document.getElementById('statsTab').style = 'color: #46D1B1;';
-
     let pokemon = pokemonArray[j]['stats']
     let total = pokemon[0]['base_stat'] + pokemon[1]['base_stat'] + pokemon[2]['base_stat'] + pokemon[3]['base_stat'] + pokemon[4]['base_stat'] + pokemon[5]['base_stat']
-
     document.getElementById('pokemon-info-container').innerHTML = insertStatsTabHTML(pokemon, total);
 }
 
@@ -244,12 +225,10 @@ function evolutionTab() {
     colorOffSelectedTab();
     document.getElementById('evolutionTab').style = 'color: #46D1B1;';
     document.getElementById('pokemon-info-container').innerHTML = insertEvolutionTabFrameHTML();
-
     for (let ev_pokms = 0; ev_pokms < pokemonEvolutionChainPokemons.length; ev_pokms++) {
         let ev_pokm = pokemonEvolutionChainPokemons[ev_pokms];
         let ev_pokmSprite = ev_pokm['sprites']['other']['official-artwork']['front_default'];
         let ev_pokmCard = ev_pokm['id'] - 1;
-
         document.getElementById('pokemonEvolutionContainer').innerHTML += insertEvolutionTabHTML(ev_pokmCard, ev_pokmSprite, ev_pokms, pokemonEvolutionChainPokemons);
     }
 }
@@ -258,14 +237,10 @@ function evolutionTab() {
 function movesTab(j) {
     colorOffSelectedTab();
     document.getElementById('movesTab').style = 'color: #46D1B1;';
-
     let pokemonMoves = pokemonArray[j]['moves'];
-
     document.getElementById('pokemon-info-container').innerHTML = insertMovesTabFrameHTML();
-
     for (let m = 0; m < pokemonMoves.length; m++) {
         let moves = pokemonMoves[m]['move']['name'];
-
         document.getElementById('movesContainer').innerHTML += insertMovesTabHTML(moves, m, pokemonMoves);
     }
 }
@@ -273,9 +248,7 @@ function movesTab(j) {
 
 async function loadSinglePokemonInformation(id) {
     await loadPokemonSpecies(id);
-
     await loadPokemonEvolution();
-
     savePokemonEvolutionName();
 }
 
@@ -302,7 +275,6 @@ function savePokemonEvolutionName() {
     let evolves_to = pokemonEvolution[0]['chain']['evolves_to'];
     while (evolves_to.length > 0) {
         pokemonEvolutionName.push(evolves_to[0]['species']['name']);
-
         evolves_to = evolves_to[0]['evolves_to'];
     }
 }
@@ -312,7 +284,6 @@ async function saveEvolutionChainPokemons() {
 
     for (let ev_pokms = 0; ev_pokms < pokemonEvolutionName.length; ev_pokms++) {
         let ev_pokm = pokemonEvolutionName[ev_pokms];
-
         let ev_pokmLink = await fetch(`https://pokeapi.co/api/v2/pokemon/${ev_pokm}`);
         let ev_pokmJson = await ev_pokmLink.json();
         pokemonEvolutionChainPokemons.push(ev_pokmJson);

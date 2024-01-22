@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="search-music-container">
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" onsubmit="searchPokemon(); return false;">
                 <input id="searchInput" class="form-control me-2" type="search" placeholder="Search Name/ID..."
                     aria-label="Search">
             </form>
@@ -56,13 +56,20 @@
         </div>
     </section>
 
-    <div id="loadMoreButton" class="load-more-button-container">
-        <button id="loadMoreButtonClick" onclick="loadMorePokemon()" type="button" class="btn load-more-button">
-            load more...
-            <div id="loadingSpinner" class="spinner-border spinner-border-sm hide" role="status">
-                <span class="visually-hidden">Loading...</span>
+    <div class="load-up-container">
+        <div id="loadMoreButton" class="load-more-button-container">
+            <button id="loadMoreButtonClick" onclick="loadMorePokemon()" type="button" class="btn load-more-button">
+                load more...
+                <div id="loadingSpinner" class="spinner-border spinner-border-sm hide" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
+        </div>
+        <a href="#">
+            <div class="scroll-up-button">
+                <img src="./assets/img/up-arrow.png" alt="">
             </div>
-        </button>
+        </a>
     </div>
     <script src="./data.js"></script>
     <script src="./template.js"></script>

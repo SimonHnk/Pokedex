@@ -63,14 +63,11 @@ function favPokemonCount() {
 function openFavPokemons() {
     document.getElementById('loadMoreButton').classList.add('hide');
     favPokemonsEmpty();
-
     for (let fav = 0; fav < favPokemons.length; fav++) {
         let pokemon = favPokemons[fav]['pokemon'];
         let id = favPokemons[fav]['id'];
         let typeContainer = 'pokemonType';
-
         document.getElementById('pokemonIndex').innerHTML += insertFavPokemonCardHTML(fav, id, pokemon, typeContainer);
-
         insertType(id, pokemon, typeContainer);
     }
 }
@@ -90,15 +87,11 @@ async function openFavPokeCard(fav) {
     let pokemon = favPokemons[fav]['pokemon'];
     let id = favPokemons[fav]['id'];
     let typeContainer = 'cardPokemonType';
-
     loadingSpinnerPokeCardOn();
-
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
-
     loadingSpinnerPokeCardOff();
     card.innerHTML = insertOpenFavPokeCardHTML(fav, id, pokemon, typeContainer);
-
     insertType(id, pokemon, typeContainer);
     insertAbility(pokemon);
 }
@@ -109,7 +102,6 @@ function saveToFavRendered(id, fav) {
     saveFavPokemons();
     favPokemonCount();
     openFavPokemons();
-
     if (favPokemons.length === 0) {
         document.getElementById('pokemonInfoCard').innerHTML = '';
         return false;

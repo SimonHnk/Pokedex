@@ -434,12 +434,15 @@ function lastFavPokemon(fav) {
 
 function insertId(id) {
     if (id.toString().length == 1) {
-        return `00${id}`;
+        return `000${id}`;
     }
     if (id.toString().length == 2) {
-        return `0${id}`;
+        return `00${id}`;
     }
     if (id.toString().length == 3) {
+        return `0${id}`;
+    }
+    if (id.toString().length == 4) {
         return `${id}`;
     }
 }

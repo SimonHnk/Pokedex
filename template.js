@@ -161,7 +161,6 @@ function insertOpenPokeCardHTML(j, id, pokemon, typeContainer) {
 function insertOpenExternalSearchPokeCardHTML(j, id, pokemon, typeContainer) {
     return `
     <div class="pokemon-info-card-background" onclick="exitPokeCard()">
-        ${lastPokemon(j)}
         <div class="card pokemon-info-card ${pokemon['types'][0]['type']['name']}" onclick="stopPropagation(event)">
             <img class="img-fluid bg-info-card-pokeball" src="./assets/img/pokeball.png" alt="Pokeball">
             <div class="pokemon-info-card-top">
@@ -238,7 +237,6 @@ function insertOpenExternalSearchPokeCardHTML(j, id, pokemon, typeContainer) {
                 </div>
             </div>
         </div>
-        ${nextPokemonArrow(j)}
     </div>
     `;
 }

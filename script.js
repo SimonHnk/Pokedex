@@ -232,14 +232,14 @@ function renderExternalPokemons(j) {
 
 async function openExternalSearchPokeCard(j) {
     let card = document.getElementById('pokemonInfoCard');
-    let pokemon = pokemonArray[j];
-    let id = j + 1;
+    let pokemon = externalPokemonArray[j];
+    let id = externalPokemonArray[j]['id'];
     let typeContainer = 'cardPokemonType';
     loadingSpinnerPokeCardOn();
     await loadSinglePokemonInformation(id);
     saveEvolutionChainPokemons();
     loadingSpinnerPokeCardOff();
-    card.innerHTML = insertOpenPokeCardHTML(j, id, pokemon, typeContainer);
+    card.innerHTML = insertOpenExternalSearchPokeCardHTML(j, id, pokemon, typeContainer);
     insertType(id, pokemon, typeContainer);
     insertAbility(pokemon);
 }

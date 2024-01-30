@@ -6,6 +6,7 @@ function init() {
     loadFavPokemons();
     favPokemonCount();
     loadExternalSearch();
+    proofCheckbox();
 }
 
 
@@ -123,7 +124,7 @@ async function loadExternalSearch() {
 }
 
 
-// document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
+document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
 
 
 function searchPokemon() {
@@ -138,9 +139,28 @@ function searchPokemon() {
 }
 
 
+function proofCheckbox() {
+    if (localStorage.getItem('checkbox')) {
+        checkbox = JSON.parse(localStorage.getItem('checkbox'));
+    }
+    document.getElementById('checkbox').checked = checkbox;
+}
+
+function externalSearchToggle() {
+    checkbox = !checkbox;
+    localStorage.setItem('checkbox', JSON.stringify(checkbox));
+    if (!checkbox) {
+        window.location.replace('./index.html');
+    }
+}
+
+
 function tryExternalSearch(match, searchQuerry) {
-    let checkbox = document.getElementById('checkbox').checked;
-    if (checkbox) {
+    if (!searchQuerry) {
+        window.location.replace('./index.html');
+    }
+    if (checkbox && searchQuerry > 0) {
+        document.getElementById('pokemonIndex').innerHTML = '';
         if (match) {
             searchIdNumberExternal(match);
         } else {
@@ -158,7 +178,6 @@ function tryExternalSearch(match, searchQuerry) {
 
 async function searchIdNumberExternal(match) {
     let searchId = match.toString();
-    document.getElementById('pokemonIndex').innerHTML = '';
     for (let ext_pkm = 1; ext_pkm < 1025; ext_pkm++) {
         let pkmId = ext_pkm.toString();
         let url = externalSearchArray[0][ext_pkm - 1]['url'];

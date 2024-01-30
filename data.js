@@ -12,3 +12,4 @@ let backgroundSound = new Audio('./assets/sounds/rpg-town-loop.mp3');
 let favPokemons = [];
 let externalSearchArray = [];
 let externalPokemonArray = [];
+let checkbox = false;

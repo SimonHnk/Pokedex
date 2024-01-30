@@ -59,6 +59,11 @@ header div {
 .music-container img {
     height: 20px;
     cursor: pointer;
+    transition: 120ms;
+}
+
+.music-container img:hover {
+    transform: scale(1.1);
 }
 
 .center-index {

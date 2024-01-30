@@ -164,7 +164,7 @@ function tryExternalSearch(match, searchQuerry) {
     if (!searchQuerry) {
         window.location.replace('./index.html');
     }
-    if (checkbox && searchQuerry > 0) {
+    if (checkbox && searchQuerry.length > 0) {
         document.getElementById('pokemonIndex').innerHTML = '';
         if (match) {
             searchIdNumberExternal(match);
@@ -199,14 +199,20 @@ async function searchIdNumberExternal(match) {
 }
 
 
-function searchNameExternal(searchQuerry) {
-    for (let ext_pkm = 0; ext_pkm < externalSearchArray[0].length; ext_pkm++) {
+async function searchNameExternal(searchQuerry) {
+    document.getElementById('searchInput').disabled = true;
+    for (let ext_pkm = 0; ext_pkm < 1024; ext_pkm++) {
         let pkmName = externalSearchArray[0][ext_pkm]['name'];
+        let url = externalSearchArray[0][ext_pkm]['url'];
         if (pkmName.includes(searchQuerry.trim().toLowerCase())) {
-            console.log('Ja');
-        }
-        
+            let response = await fetch(url);
+            let externalPkm = await response.json();
+            externalPokemonArray = externalPkm;
+            console.log(externalPkm);
+            await renderExternalPokemons();
+        } 
     }
+    document.getElementById('searchInput').disabled = false;
 }
 
 

@@ -10,6 +10,7 @@ let pokemonEvolutionName = [];
 let pokemonEvolutionChainPokemons = [];
 let backgroundSound = new Audio('./assets/sounds/rpg-town-loop.mp3');
 let favPokemons = [];
+let currentExternalPokemon;
 let externalSearchArray = [];
 let externalPokemonArray = [];
 let checkbox = false;

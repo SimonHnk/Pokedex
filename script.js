@@ -191,9 +191,10 @@ async function searchIdNumberExternal(match) {
         if (pkmId.includes(searchId)) {
             let response = await fetch(url);
             let externalPkm = await response.json();
-            externalPokemonArray = externalPkm;
-            console.log(externalPkm);
-            await renderExternalPokemons();
+            await externalPokemonArray.push(externalPkm);
+            let j = externalPokemonArray.length - 1;
+            currentExternalPokemon = externalPkm;
+            renderExternalPokemons(j);
         }
     }
     document.getElementById('searchInput').disabled = false;
@@ -210,22 +211,37 @@ async function searchNameExternal(searchQuerry) {
         if (pkmName.includes(searchQuerry.trim().toLowerCase())) {
             let response = await fetch(url);
             let externalPkm = await response.json();
-            externalPokemonArray = externalPkm;
-            console.log(externalPkm);
-            await renderExternalPokemons();
-        } 
+            await externalPokemonArray.push(externalPkm);
+            let j = externalPokemonArray.length - 1;
+            currentExternalPokemon = externalPkm;
+            renderExternalPokemons(j);
+        }
     }
     document.getElementById('searchInput').disabled = false;
     document.getElementById('loadingSpinnerExternal').classList.add('hide');
 }
 
 
-function renderExternalPokemons() {
-        let id = externalPokemonArray['id'];
-        let j = id - 1;
-        let typeContainer = 'pokemonType';
-        document.getElementById('pokemonIndex').innerHTML += insertPokemonCardHTML(j, id, externalPokemonArray, typeContainer);
-        insertType(id, externalPokemonArray, typeContainer);
+function renderExternalPokemons(j) {
+    let id = currentExternalPokemon['id'];
+    let typeContainer = 'pokemonType';
+    document.getElementById('pokemonIndex').innerHTML += insertExternalSearchPokemonCardHTML(j, id, currentExternalPokemon, typeContainer);
+    insertType(id, currentExternalPokemon, typeContainer);
+}
+
+
+async function openExternalSearchPokeCard(j) {
+    let card = document.getElementById('pokemonInfoCard');
+    let pokemon = pokemonArray[j];
+    let id = j + 1;
+    let typeContainer = 'cardPokemonType';
+    loadingSpinnerPokeCardOn();
+    await loadSinglePokemonInformation(id);
+    saveEvolutionChainPokemons();
+    loadingSpinnerPokeCardOff();
+    card.innerHTML = insertOpenPokeCardHTML(j, id, pokemon, typeContainer);
+    insertType(id, pokemon, typeContainer);
+    insertAbility(pokemon);
 }
 
 

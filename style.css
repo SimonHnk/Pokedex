@@ -686,6 +686,17 @@ header div {
     margin-top: -4px;
 }
 
+.subheadline-external {
+    font-size: 14px;
+    margin-top: -6px;
+}
+
+.external-text-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;

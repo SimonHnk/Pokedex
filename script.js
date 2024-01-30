@@ -124,9 +124,6 @@ async function loadExternalSearch() {
 }
 
 
-document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
-
-
 function searchPokemon() {
     let searchQuerry = document.getElementById('searchInput').value
     let match = searchQuerry.match(/\d+/);
@@ -144,6 +141,11 @@ function proofCheckbox() {
         checkbox = JSON.parse(localStorage.getItem('checkbox'));
     }
     document.getElementById('checkbox').checked = checkbox;
+    if (!checkbox) {
+        document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
+    } else {
+        document.getElementById('searchInput').removeEventListener('keyup', searchPokemon);
+    }
 }
 
 function externalSearchToggle() {
@@ -151,6 +153,9 @@ function externalSearchToggle() {
     localStorage.setItem('checkbox', JSON.stringify(checkbox));
     if (!checkbox) {
         window.location.replace('./index.html');
+        document.getElementById('searchInput').addEventListener('keyup', searchPokemon);
+    } else {
+        document.getElementById('searchInput').removeEventListener('keyup', searchPokemon);
     }
 }
 
@@ -177,6 +182,7 @@ function tryExternalSearch(match, searchQuerry) {
 
 
 async function searchIdNumberExternal(match) {
+    document.getElementById('searchInput').disabled = true;
     let searchId = match.toString();
     for (let ext_pkm = 1; ext_pkm < 1025; ext_pkm++) {
         let pkmId = ext_pkm.toString();
@@ -189,6 +195,7 @@ async function searchIdNumberExternal(match) {
             await renderExternalPokemons();
         }
     }
+    document.getElementById('searchInput').disabled = false;
 }
 
 

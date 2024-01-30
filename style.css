@@ -695,6 +695,7 @@ header div {
     display: flex;
     flex-direction: column;
     text-align: center;
+    cursor: pointer;
 }
 
 .external-spinner {
@@ -707,17 +708,17 @@ header div {
     display: inline-block;
     width: 34px;
     height: 18px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -727,9 +728,9 @@ header div {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 16px;
@@ -739,30 +740,30 @@ header div {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked+.slider {
     background-color: #1e88df;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus+.slider {
     box-shadow: 0 0 8px #1e88df;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked+.slider:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
+}
+
+/* Rounded sliders */
+.slider.round {
     border-radius: 34px;
-  }
-  
-  .slider.round:before {
+}
+
+.slider.round:before {
     border-radius: 50%;
-  }
+}
 
 .hide {
     display: none;
@@ -825,6 +826,12 @@ header div {
 
     #caughtPokemonCount {
         font-size: 12px;
+    }
+}
+
+@media(max-width: 446px) {
+    .external-switch {
+        margin-left: 0;
     }
 }
 

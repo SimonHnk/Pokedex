@@ -697,6 +697,10 @@ header div {
     text-align: center;
 }
 
+.external-spinner {
+    width: 22px;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;

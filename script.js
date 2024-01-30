@@ -161,7 +161,7 @@ function externalSearchToggle() {
 
 
 function tryExternalSearch(match, searchQuerry) {
-    if (!searchQuerry) {
+    if (!searchQuerry || '') {
         window.location.replace('./index.html');
     }
     if (checkbox && searchQuerry.length > 0) {
@@ -183,6 +183,7 @@ function tryExternalSearch(match, searchQuerry) {
 
 async function searchIdNumberExternal(match) {
     document.getElementById('searchInput').disabled = true;
+    document.getElementById('loadingSpinnerExternal').classList.remove('hide');
     let searchId = match.toString();
     for (let ext_pkm = 1; ext_pkm < 1025; ext_pkm++) {
         let pkmId = ext_pkm.toString();
@@ -196,11 +197,13 @@ async function searchIdNumberExternal(match) {
         }
     }
     document.getElementById('searchInput').disabled = false;
+    document.getElementById('loadingSpinnerExternal').classList.add('hide');
 }
 
 
 async function searchNameExternal(searchQuerry) {
     document.getElementById('searchInput').disabled = true;
+    document.getElementById('loadingSpinnerExternal').classList.remove('hide');
     for (let ext_pkm = 0; ext_pkm < 1024; ext_pkm++) {
         let pkmName = externalSearchArray[0][ext_pkm]['name'];
         let url = externalSearchArray[0][ext_pkm]['url'];
@@ -213,6 +216,7 @@ async function searchNameExternal(searchQuerry) {
         } 
     }
     document.getElementById('searchInput').disabled = false;
+    document.getElementById('loadingSpinnerExternal').classList.add('hide');
 }
 
 
